@@ -1,0 +1,9 @@
+{
+  "source_suite": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\AUTO_EVAL_COMPARISON\\results\\rm36_sweeps\\20261030_175214_413770",
+  "output": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\AUTO_EVAL_COMPARISON\\reports\\rm36_full6000_pe_style_20261030_181835",
+  "checkpoints": 35,
+  "final_reward": 119.54505111359438,
+  "final_success_pct": 100.0,
+  "style": "DejaVu Sans 10, #239bce, 12x8 combined, 7x4.2 individual",
+  "smoothing": false
+}

@@ -1,0 +1,27 @@
+{
+  "recorded_steps": 6000,
+  "human_actions": 2051,
+  "replay_eligible_human": 1768,
+  "replay_ineligible_human": 283,
+  "saturated_human": 153,
+  "source_storage": [
+    {
+      "session": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_old5000_to6000_v2\\20261027_164141",
+      "first_step": 1,
+      "last_step": 5000,
+      "archived": true
+    },
+    {
+      "session": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_old5000_to6000_v2\\20261027_180357",
+      "first_step": 5001,
+      "last_step": 6000,
+      "archived": false
+    }
+  ],
+  "original_session_boundaries": [
+    4000,
+    5000
+  ],
+  "steering_units": "Recorded normalized HUMAN action converted to degrees; clipped at +/-200 deg",
+  "red_meaning": "HUMAN transition not eligible for replay, not an RM36 filter rejection"
+}

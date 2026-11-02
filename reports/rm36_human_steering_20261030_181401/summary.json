@@ -1,0 +1,22 @@
+{
+  "recorded_steps": 6000,
+  "human_actions": 1796,
+  "accepted_human": 765,
+  "rejected_human": 1031,
+  "reject_rate_pct": 57.40534521158129,
+  "accepted_but_replay_ineligible": 21,
+  "session_boundaries": [
+    865,
+    1326,
+    1941,
+    3134,
+    4000,
+    4763
+  ],
+  "source_storage": [
+    "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\RM36\\experiments\\phuoc8_threshold30_sticky_noreset_noise_resume4763_20261030_v1\\20261030_172633",
+    "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\RM36\\experiments\\phuoc8_threshold30_sticky_noreset_noise_resume4763_20261030_v1\\20261030_174140"
+  ],
+  "blue_meaning": "RM36 accepted; other replay-quality gates may still exclude a transition",
+  "red_meaning": "Recorded RM36 rejection, not an inferred wrong-action ground truth"
+}

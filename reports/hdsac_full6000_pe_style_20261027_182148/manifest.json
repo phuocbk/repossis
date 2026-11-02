@@ -1,0 +1,704 @@
+{
+  "algorithm": "HDSAC",
+  "branch_id": "original_5000_plus_verified_6000_continuation",
+  "tests": 1,
+  "mock": false,
+  "protocol": {
+    "purpose": "HDSAC checkpoint evaluation; same reward/protocol as PE-RLHF",
+    "status": "planned",
+    "scenario": "phuoc8.sce",
+    "algorithms": [
+      "HDSAC"
+    ],
+    "control_mode": "pure_auto_deterministic",
+    "training_updates": false,
+    "human_takeover": false,
+    "checkpoint_selection": "explicit_path_required_before_test",
+    "episodes_per_algorithm": 1,
+    "max_speed_kmh": 15,
+    "frequency_hz": 10,
+    "stall_speed_threshold_kmh": 1,
+    "stall_timeout_sec": 40,
+    "horizon_steps": 200,
+    "goal_region": [
+      47,
+      52,
+      6,
+      10.5
+    ],
+    "reward": {
+      "formula": "(progress_m - previous_progress_m) + 0.1 * speed_kmh / 80 + 20 * goal",
+      "progress": "signed arc-length projection on the same reference route for both algorithms",
+      "speed": "nonnegative speed magnitude in km/h",
+      "goal_bonus": "once on the terminal goal step",
+      "episode_score": "undiscounted sum of step rewards",
+      "normalization_to_100": false,
+      "extra_lane_or_collision_penalty": false
+    },
+    "output_root": "results",
+    "required_result_fields": [
+      "algorithm",
+      "checkpoint",
+      "episode",
+      "steps",
+      "duration_sec",
+      "terminal_reason",
+      "goal",
+      "offroad",
+      "collision",
+      "reward_driving_sum",
+      "reward_speed_sum",
+      "reward_destination_sum",
+      "episode_return"
+    ]
+  },
+  "config": {
+    "schema": "pe_rlhf_scaner257_v1",
+    "seed": 8801,
+    "environment": {
+      "scenario": "phuoc8.sce",
+      "configuration": "CONTROLWORKS",
+      "process_name": "CAMCHECK",
+      "vehicle_id": 0,
+      "frequency_hz": 10,
+      "connect_timeout_sec": 60,
+      "telemetry_timeout_sec": 5,
+      "calibration_timeout_sec": 60,
+      "lidar_root": "Z:\\SCANeRstudio_2022\\sensor_logs\\lidar",
+      "lidar_max_age_sec": 2,
+      "lidar_physics_ground_z_m": 0.1,
+      "lidar_physics_min_obstacle_height_m": 0.15,
+      "lidar_wait_timeout_sec": 5,
+      "lidar_range_m": 50,
+      "max_speed_kmh": 15,
+      "take_over_gearbox": true,
+      "steering_limit_deg": 200,
+      "brake_full_scale": 1600,
+      "steering_sign": 1,
+      "lane_half_width_m": 3,
+      "evaluation_lane_boundary_m": 1.75,
+      "road_left_clearance_m": 9,
+      "road_right_clearance_m": 3,
+      "horizon": 200,
+      "stall_sec": 40,
+      "goal_region": [
+        47,
+        52,
+        6,
+        10.5
+      ],
+      "route": [
+        [
+          -10.133,
+          -45.0841
+        ],
+        [
+          -4.4445,
+          -45.1308
+        ],
+        [
+          -0.1333,
+          -45.1663
+        ],
+        [
+          9.8663,
+          -45.2484
+        ],
+        [
+          19.866,
+          -45.3306
+        ],
+        [
+          29.8657,
+          -45.4127
+        ],
+        [
+          31.3345,
+          -45.4248
+        ],
+        [
+          33.2118,
+          -45.3421
+        ],
+        [
+          35.0703,
+          -45.0642
+        ],
+        [
+          36.8896,
+          -44.594
+        ],
+        [
+          38.6501,
+          -43.9367
+        ],
+        [
+          40.3324,
+          -43.0995
+        ],
+        [
+          41.9183,
+          -42.0914
+        ],
+        [
+          43.3904,
+          -40.9235
+        ],
+        [
+          44.7328,
+          -39.6085
+        ],
+        [
+          45.9307,
+          -38.1606
+        ],
+        [
+          46.9712,
+          -36.5958
+        ],
+        [
+          47.8428,
+          -34.9311
+        ],
+        [
+          48.5362,
+          -33.1845
+        ],
+        [
+          49.0436,
+          -31.3752
+        ],
+        [
+          49.3597,
+          -29.5228
+        ],
+        [
+          49.481,
+          -27.6476
+        ],
+        [
+          49.5427,
+          -22.648
+        ],
+        [
+          49.6044,
+          -17.6484
+        ],
+        [
+          49.6661,
+          -12.6487
+        ],
+        [
+          49.7279,
+          -7.6491
+        ],
+        [
+          49.7896,
+          -2.6495
+        ],
+        [
+          49.8513,
+          2.3501
+        ],
+        [
+          49.913,
+          7.3497
+        ],
+        [
+          49.9415,
+          9.6569
+        ]
+      ]
+    },
+    "physics": {
+      "desired_speed_kmh": 15,
+      "wheelbase_m": 2.7,
+      "steering_ratio": 16,
+      "amax": 2,
+      "comfortable_braking": 5,
+      "standstill_gap": 10,
+      "time_headway": 1.5,
+      "exponent": 4,
+      "politeness": 0.1,
+      "acceleration_threshold": 0.2,
+      "safe_deceleration": 2,
+      "lane_change_time_gap": 1
+    },
+    "learning": {
+      "hidden_size": 256,
+      "gamma": 0.99,
+      "tau": 0.005,
+      "lr": 0.0001,
+      "batch_size": 1024,
+      "learning_starts": 100,
+      "steps_per_iteration": 100,
+      "gradient_updates_per_iteration": 100,
+      "preference_weight": 10,
+      "psi": 1,
+      "beta": 1,
+      "target_entropy": -2,
+      "paper_entropy_magnitude": 2,
+      "replay_capacity": 100000,
+      "save_every": 100
+    },
+    "estimator": {
+      "hidden_size": 256,
+      "gamma": 0.99,
+      "tau": 0.005,
+      "lr": 0.0001,
+      "warmup_steps": 2000,
+      "fit_updates": 10000,
+      "batch_size": 1024,
+      "selection_epsilon": 0.5,
+      "validation_min_pairs": 30,
+      "validation_min_accuracy": 0.55,
+      "validation_confidence_floor": 0.5
+    }
+  },
+  "tasks": [
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 100,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_000100.pt",
+      "checkpoint_sha256": "b2ad23aaf72e1c326f045f35e7c25c71d4fe82d2d27e7e7de60dc871ff32b5fd",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_000100"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 200,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_000200.pt",
+      "checkpoint_sha256": "7a86cb747a628035d577a2255e7b05e12386fcba56d8d7e5f61357b5ecd765f3",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_000200"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 300,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_000300.pt",
+      "checkpoint_sha256": "6756a8e8a7d19d176d41c5042f4f87510beed8980efc4a74e1ef984593313d32",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_000300"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 400,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_000400.pt",
+      "checkpoint_sha256": "6bd2cf851081557beb7bd3c1ddb388bd3b576f539638ecd21727d83b7456b0fb",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_000400"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 500,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_000500.pt",
+      "checkpoint_sha256": "9d77007042c458805581fee5682d91da45926d3b2f48d5b12369aa73dbba8875",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_000500"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 600,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_000600.pt",
+      "checkpoint_sha256": "517900bc9dda35f2d709233e2e429f02317bcd791d09c642bc748acacab2f955",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_000600"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 700,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_000700.pt",
+      "checkpoint_sha256": "8de92754da6de41a9ceb96602875c1316ef1fbed8299cc692b0d5b9ee9827b2d",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_000700"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 800,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_000800.pt",
+      "checkpoint_sha256": "ee838914a15ef2998af6fb4a6119444051a428a2ef004129c377c65e2df61489",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_000800"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 900,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_000900.pt",
+      "checkpoint_sha256": "7d65dca0db872ff83db477982135ac90d2c3ecf7110cb739bf3ed8d9077e28ab",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_000900"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 1000,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_001000.pt",
+      "checkpoint_sha256": "92e195450c11fc4d7a06d058068bab855e8cf01c2f9ababd322160f3dc13b816",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_001000"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 1100,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_001100.pt",
+      "checkpoint_sha256": "42e9ba3e6f47ebf5d94eeb0348771426394a855ac5043efa4639970af82cb14f",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_001100"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 1200,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_001200.pt",
+      "checkpoint_sha256": "fbe15c03c5432ebf66a0241ddab5e4bbb79e01c986029da5b5ef9b130711255e",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_001200"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 1300,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_001300.pt",
+      "checkpoint_sha256": "bc9390f65a78b57b08b5d9a936c82a9f7ade278a0d4735860ac58afb43f2fb6f",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_001300"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 1400,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_001400.pt",
+      "checkpoint_sha256": "530757ca543946464bed4dad74118a65b0b6098548375775567499703395e60a",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_001400"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 1500,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_001500.pt",
+      "checkpoint_sha256": "60435f42ce3cf06f4e31d3f4e7907abd2b589641c96cb05086b5e4d84c520416",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_001500"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 1600,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_001600.pt",
+      "checkpoint_sha256": "d90a50768aa608c91e580eb9565661307633499886ed37065cdd758eda036896",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_001600"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 1700,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_001700.pt",
+      "checkpoint_sha256": "af6805100754660a3d1bc42fdd578f43aa93159924852092766887def9cfa182",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_001700"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 1800,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_001800.pt",
+      "checkpoint_sha256": "34552d0b547a8f4245690ca678a12d1a6d7bade6a26dd550ef7ee3b83e825d69",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_001800"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 1900,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_001900.pt",
+      "checkpoint_sha256": "c21ee1168e93525c7da306330919e44e05ba562392496aa40aa23ddd7845ce24",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_001900"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 2000,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_002000.pt",
+      "checkpoint_sha256": "84d9a92210120674a6d6595dcdd2c29eea7d22b9dce33315290dfa4971d61282",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_002000"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 2100,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_002100.pt",
+      "checkpoint_sha256": "fa5ddb61b1e970bffcd12402e16fe8d3745d5e12d813b0d545bfb0d60b9fd6c7",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_002100"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 2200,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_002200.pt",
+      "checkpoint_sha256": "e6be51c3cbe7250f01c35d281e312aacbd103d86ec77f479103694f9ab8e389e",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_002200"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 2300,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_002300.pt",
+      "checkpoint_sha256": "bf15bfa7301b68b86576e680c702eb086d54a2f8fe261f8d0c2f4c3354cb22d3",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_002300"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 2400,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_002400.pt",
+      "checkpoint_sha256": "331ee9067bdd51f79ad9a3e9aa0e16e268aeaf44403a25ff523e95588f0b4868",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_002400"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 2500,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_002500.pt",
+      "checkpoint_sha256": "83aaf6fd4f48a50fac137933f8c8579c6e4bae8fdd5dac140d39efeca4681a80",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_002500"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 2600,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_002600.pt",
+      "checkpoint_sha256": "1ef6708e463017d450d45612b21f6e492e3b7237e58de410833acddf3d4c0144",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_002600"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 2700,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_002700.pt",
+      "checkpoint_sha256": "eccaf0a510aeb9468dd6938ec2dcc32849ae3d6e30026ed6b7bc5587d3450001",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_002700"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 2800,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_002800.pt",
+      "checkpoint_sha256": "0634e3a35a7cab9efdea11968ebe78bf5bfd7fed80f34f0a1ff0a889547ae83c",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_002800"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 2900,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_002900.pt",
+      "checkpoint_sha256": "879530611823b3b128c196210501154be9683d30f01b9d119cbc0ff4e7eecac2",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_002900"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 3000,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_003000.pt",
+      "checkpoint_sha256": "66f5041085bfa50bf83a338fa4a28e58a29e5e362c9441b627bb9c97ddf41ad9",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_003000"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 3100,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_003100.pt",
+      "checkpoint_sha256": "b187e064f0fde618cd8af750e684d079c58ced9c79391799b8a732eb209fda8a",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_003100"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 3200,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_003200.pt",
+      "checkpoint_sha256": "a893b89e8536881021b2a5c99bd5a10cf3253b7882f7fc0e72dc0e5538aea04e",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_003200"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 3300,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_003300.pt",
+      "checkpoint_sha256": "65f394ff8ba97c9714d8979368eedff957a0c062d26ce5e3760b839bff3f147b",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_003300"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 3400,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_003400.pt",
+      "checkpoint_sha256": "eeded98944c530014c3fbd75296b19fbc89b4c669b6a8818529629832097a3fb",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_003400"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 3500,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_003500.pt",
+      "checkpoint_sha256": "36a0d19ec4b9cfdf5e311b0710d6d5a4c0e8907dc27adb4187aa2497e876acb1",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_003500"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 3600,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_003600.pt",
+      "checkpoint_sha256": "77046ca1c8a3733aa24a60223761962054ed3fe8c896c015ce158bb48d17a624",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_003600"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 3700,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_003700.pt",
+      "checkpoint_sha256": "3d1ababab52b5f21d990e65ef25d48bda16981bbf066f4a8cadb80bcc4a6c5ca",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_003700"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 3800,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_003800.pt",
+      "checkpoint_sha256": "3856a29c04306db52ab46a236db2a6ffd0e1bcd3e952224a012d77254faf4f68",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_003800"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 3900,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_003900.pt",
+      "checkpoint_sha256": "8e9837399baef9e063a0443ae0dce20b0fc700fa5b011d78a30b51479aa0c1f1",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_003900"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 4000,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_160217\\actor_critic_step_004000.pt",
+      "checkpoint_sha256": "030d4472ed3aea960eb1d7a75502591419fb7dc28ffcb1a14ac6686db423de54",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_004000"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 4100,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_164141\\actor_critic_step_004100.pt",
+      "checkpoint_sha256": "e4c17aac941dd8e4c4e2a4ad8396b0d2ef1c4fafec76ec1370aca8848a0ff946",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_004100"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 4200,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_164141\\actor_critic_step_004200.pt",
+      "checkpoint_sha256": "9e997305aff86f6e24d82e6d0c19843a31026b1f0903ed3e2a783729e34bbc1d",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_004200"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 4300,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_164141\\actor_critic_step_004300.pt",
+      "checkpoint_sha256": "76ab70f46f905e403623f5d276dd38fe30411f4b06a5c533f59f28c01f767cce",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_004300"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 4400,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_164141\\actor_critic_step_004400.pt",
+      "checkpoint_sha256": "036dd248d86adbdac23469420127c95ede02742d5f3e397d6fe079379cae2490",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_004400"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 4500,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_164141\\actor_critic_step_004500.pt",
+      "checkpoint_sha256": "3a872f17d076508f4afd27d39379a0562c35509a2c4cefce51d9cbb359b0d6c4",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_004500"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 4600,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_164141\\actor_critic_step_004600.pt",
+      "checkpoint_sha256": "01ba906812270a477c7ad04a8d392980a0361211a9a22e5b9bb2f3352ecfb30d",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_004600"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 4700,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_164141\\actor_critic_step_004700.pt",
+      "checkpoint_sha256": "6ac025b0afe0df0029187afe73896bbb6511027e36307922193ddaa0dc4549b4",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_004700"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 4800,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_164141\\actor_critic_step_004800.pt",
+      "checkpoint_sha256": "c10b426c10287b637cfe4bc4f9ecab40fd7266289c93dd486e188c6ddbe6670c",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_004800"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 4900,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_164141\\actor_critic_step_004900.pt",
+      "checkpoint_sha256": "b28f09d771059ceb9895a6ff8e60f2981c0b849edc9f94414c2f4a7d5528f127",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_004900"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 5000,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_noise1000_v1\\20261027_164141\\actor_critic_step_005000.pt",
+      "checkpoint_sha256": "2da9b9fe11f75e2e9c73659a4a1ebf61c31c9bd0b2570ed6175e050bc94c909f",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_165527_380432\\step_005000"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 5100,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_old5000_to6000_v2\\20261027_180357\\actor_critic_step_005100.pt",
+      "checkpoint_sha256": "e0875a17399c65557b17a0e677892e5d2ba9bd178174c66d0cc17f070168323e",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_181310_184269_steps5100_6000\\step_005100"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 5200,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_old5000_to6000_v2\\20261027_180357\\actor_critic_step_005200.pt",
+      "checkpoint_sha256": "5bcd02a7927022f35209e7c0226fa805333c7820a06c1c9dce02f5844201dade",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_181310_184269_steps5100_6000\\step_005200"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 5300,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_old5000_to6000_v2\\20261027_180357\\actor_critic_step_005300.pt",
+      "checkpoint_sha256": "9a825e244ed361fd996140b0b91e4545d307942d20e748d468d93b0cfa5dc8ea",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_181310_184269_steps5100_6000\\step_005300"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 5400,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_old5000_to6000_v2\\20261027_180357\\actor_critic_step_005400.pt",
+      "checkpoint_sha256": "496dabeaca3a0129dda2a7f49c21bcc38e747863a0c4e4cce10d4647d9c86c56",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_181310_184269_steps5100_6000\\step_005400"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 5500,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_old5000_to6000_v2\\20261027_180357\\actor_critic_step_005500.pt",
+      "checkpoint_sha256": "d27e44e8c90452d8965ce602147fc327840985d7b50a84267dae6eec2e174a85",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_181310_184269_steps5100_6000\\step_005500"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 5600,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_old5000_to6000_v2\\20261027_180357\\actor_critic_step_005600.pt",
+      "checkpoint_sha256": "ad72ff085bb985d591ee64bd19ba982b0af1c3c73bc36afc4ecb61ed6ca45d98",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_181310_184269_steps5100_6000\\step_005600"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 5700,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_old5000_to6000_v2\\20261027_180357\\actor_critic_step_005700.pt",
+      "checkpoint_sha256": "95e4266ca9bed25fc65c06ec220e5b37f98527605e8f21af16ae65351e9fd09e",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_181310_184269_steps5100_6000\\step_005700"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 5800,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_old5000_to6000_v2\\20261027_180357\\actor_critic_step_005800.pt",
+      "checkpoint_sha256": "83274d62c6b3156ba73126c9909010d372e6520132c97f0d4699e06e7407edf0",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_181310_184269_steps5100_6000\\step_005800"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 5900,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_old5000_to6000_v2\\20261027_180357\\actor_critic_step_005900.pt",
+      "checkpoint_sha256": "b7578e4ed48cda35ef2cde6c5183467e61f279021d47c4a5b9daa316de0a69ff",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_181310_184269_steps5100_6000\\step_005900"
+    },
+    {
+      "algorithm": "HDSAC",
+      "training_steps": 6000,
+      "checkpoint": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\HDSAC_SNAPSHOT100\\experiments\\phuoc8_hdsac_no_calibration_old5000_to6000_v2\\20261027_180357\\actor_critic_step_006000.pt",
+      "checkpoint_sha256": "ceaace80fb5e45c9ae25ea1237695a1d3c0d93b09a6c4ca1a0632d61a1297123",
+      "result_dir": "..\\..\\results\\hdsac_sweeps\\20261027_181310_184269_steps5100_6000\\step_006000"
+    }
+  ],
+  "step_counter": "cumulative recorded sensor manifest rows",
+  "initialization": "fine-tuned from straight-driving HDSAC; prior training is excluded from x-axis",
+  "omitted_intermediate_checkpoints": "not retained; cannot reconstruct historical weights",
+  "evaluation_code_sha256": {
+    "AUTO_EVAL_COMPARISON\\run_hdsac_sweep.py": "8d77300c42637edd420f8a2a5973b0daa0282d0d196a0ee0a944dcca390c1d77",
+    "AUTO_EVAL_COMPARISON\\plot_hdsac_metrics.py": "ffa7ba2d0d41349804caa21931b2d6387bbc285f122c8693c03e21ba17d916ff",
+    "AUTO_EVAL_COMPARISON\\plot_four_metrics.py": "cba05cf2f8d10b91b2833fef4395b8cff3a580ff8c4e7374d39c474435db77dd",
+    "AUTO_EVAL_COMPARISON\\reward.py": "04c9cce2ac2da11f7e6d96c77a3cbbf3650decd571d9feaf8f372cb42e11a407",
+    "AUTO_EVAL_COMPARISON\\checkpoint_sweep.py": "c74be522f275d6c412bd580b00c3ae5477db84ba0168b8616733e041c5a478af",
+    "PE_RLHF_SCANeR\\train.py": "aaeda3e84b0ae8b8aacafb8826b16277b70d884387036eeb44bbd1c696f591bc",
+    "PE_RLHF_SCANeR\\environment.py": "078ad939c511004462db803ea04d2ef7bc8c04b90e206cc4fbed4d6228759858",
+    "hdsac_official.py": "19a12e02272184fd0dc551583af990bfe48249323df366480f72e741b4cb8ed6",
+    "collect_hdsac_score_eval.py": "a4be80a99635ef882b8461ea4d77c96b65c98b7a6f3a7c560e8244efab83ab07",
+    "scaner_env.py": "906bed5009432ca57838f3a2dae6a6a6032b606a50d8d3749c07591c9cc77e22",
+    "scaner_live_fusion_waypoint_agent.py": "0c908999177dcd3fe83e8f86f3f634f2ac96a261a42c6b87b47e6d4b7c2691ae"
+  },
+  "source_suites": [
+    "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\AUTO_EVAL_COMPARISON\\results\\hdsac_sweeps\\20261027_165527_380432",
+    "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\AUTO_EVAL_COMPARISON\\results\\hdsac_sweeps\\20261027_181310_184269_steps5100_6000"
+  ],
+  "source_manifest_sha256": [
+    "1d1a6840f9c5143f6f6128a91bbec1b94724017af9162582a9c509d4876b6fa2",
+    "9ff62b47334ed65102dcf04e9695cd11174ad706a12d7bf68378992910f89f9c"
+  ]
+}

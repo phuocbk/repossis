@@ -1,0 +1,20 @@
+{
+  "branch": "phuoc8_pe_rlhf_online4000_noise_retest_v3",
+  "recorded_steps": 4000,
+  "takeover_request_steps": 1435,
+  "takeover_request_pct": 35.875,
+  "human_selected_steps": 473,
+  "human_selected_pct": 11.825,
+  "physics_selected_steps": 962,
+  "physics_selected_pct": 24.05,
+  "human_selected_replay_eligible_steps": 467,
+  "takeover_starts": 17,
+  "last250_request_pct": 0.0,
+  "sessions": [
+    {
+      "name": "train_20261021_230546_798661",
+      "first_step": 1,
+      "last_step": 4000
+    }
+  ]
+}

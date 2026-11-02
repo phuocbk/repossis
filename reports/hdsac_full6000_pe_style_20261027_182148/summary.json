@@ -1,0 +1,9 @@
+{
+  "output": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\AUTO_EVAL_COMPARISON\\reports\\hdsac_full6000_pe_style_20261027_182148",
+  "checkpoints": 60,
+  "smoothing": false,
+  "style": "PE-RLHF template: DejaVu Sans 10, #239bce, 12x8 combined, 7x4.2 individual",
+  "final_reward": 71.55292118637638,
+  "final_success_pct": 0.0,
+  "final_terminal_reason": "time_limit"
+}

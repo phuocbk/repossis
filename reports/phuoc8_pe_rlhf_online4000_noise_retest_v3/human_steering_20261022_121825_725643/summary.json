@@ -1,0 +1,18 @@
+{
+  "recorded_steps": 4000,
+  "sessions": [
+    {
+      "session": "train_20261021_230546_798661",
+      "first_step": 1,
+      "last_step": 4000,
+      "steps": 4000
+    }
+  ],
+  "human_actions": 1435,
+  "selected_and_replay_eligible": 467,
+  "not_selected_or_ineligible": 968,
+  "physics_selected": 962,
+  "replay_ineligible": 6,
+  "branch": "phuoc8_pe_rlhf_online4000_noise_retest_v3",
+  "red_meaning": "HUMAN not selected by PE-HAI or replay-ineligible; not an RM36 rejection label"
+}

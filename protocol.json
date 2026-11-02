@@ -1,0 +1,32 @@
+{
+  "purpose": "Evaluation only: RM36 versus PE-RLHF",
+  "status": "prepared_not_run",
+  "scenario": "phuoc8.sce",
+  "algorithms": ["RM36", "PE-RLHF"],
+  "control_mode": "pure_auto_deterministic",
+  "training_updates": false,
+  "human_takeover": false,
+  "checkpoint_selection": "explicit_path_required_before_test",
+  "episodes_per_algorithm": 20,
+  "max_speed_kmh": 15,
+  "frequency_hz": 10,
+  "stall_speed_threshold_kmh": 1,
+  "stall_timeout_sec": 40,
+  "horizon_steps": 1000,
+  "goal_region": [47, 52, 6, 10.5],
+  "reward": {
+    "formula": "(progress_m - previous_progress_m) + 0.1 * speed_kmh / 80 + 20 * goal",
+    "progress": "signed arc-length projection on the same reference route for both algorithms",
+    "speed": "nonnegative speed magnitude in km/h",
+    "goal_bonus": "once on the terminal goal step",
+    "episode_score": "undiscounted sum of step rewards",
+    "normalization_to_100": false,
+    "extra_lane_or_collision_penalty": false
+  },
+  "output_root": "results",
+  "required_result_fields": [
+    "algorithm", "checkpoint", "episode", "steps", "duration_sec",
+    "terminal_reason", "goal", "offroad", "collision",
+    "reward_driving_sum", "reward_speed_sum", "reward_destination_sum", "episode_return"
+  ]
+}

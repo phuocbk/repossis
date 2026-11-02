@@ -1,0 +1,28 @@
+{
+  "recorded_steps": 6000,
+  "sessions": [
+    {
+      "session": "train_20261030_212531_256601",
+      "first_step": 1,
+      "last_step": 4000,
+      "steps": 4000
+    },
+    {
+      "session": "train_20261030_214037_300889",
+      "first_step": 4001,
+      "last_step": 6000,
+      "steps": 2000
+    }
+  ],
+  "human_actions": 1687,
+  "selected_and_replay_eligible": 678,
+  "not_selected_or_ineligible": 1009,
+  "physics_selected": 1008,
+  "replay_ineligible": 9,
+  "executed_source_counts": {
+    "AGENT": 4313,
+    "HUMAN": 679,
+    "PHYSICS": 1008
+  },
+  "branch": "\\\\192.168.0.100\\SCANeRstudio\\SCANeRstudio_2022\\PE_RLHF_SCANeR\\experiments\\phuoc8_pe_rlhf_clean4000_then_noise2000_20261030_v6"
+}
